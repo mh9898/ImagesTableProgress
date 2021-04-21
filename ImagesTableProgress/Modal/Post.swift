@@ -12,13 +12,13 @@ struct Results: Codable {
 }
 
 struct PostUrls: Codable {
-  let regular: String
+    let regular: String
     let raw: String
     let full: String
 }
 
 struct Post: Codable {
-  let id: String
-  let description: String?
-  let urls: PostUrls
+    let id: String
+    let description: String?
+    let urls: PostUrls
 }

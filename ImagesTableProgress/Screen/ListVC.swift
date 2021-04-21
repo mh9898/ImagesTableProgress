@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol ListVCDelegate {
-    func toggleButton(_ state: Bool)
-}
 
 class ListVC: UIViewController {
     
-    var listVCDelegate: ListVCDelegate!
     var progress: Float = 0.0
     
     var tableView = UITableView()
@@ -24,9 +20,9 @@ class ListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getPostResult()
+        getPostsResult()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Files Downloader"
@@ -35,7 +31,7 @@ class ListVC: UIViewController {
         configureButton()
     }
     
-    func getPostResult(){
+    func getPostsResult(){
         networker.getPosts(query: "karaoke") { [weak self] result in
             
             guard let self = self else {return}
@@ -51,17 +47,17 @@ class ListVC: UIViewController {
             }
         }
     }
-
+    
     func configureTableView(){
         view.addSubview(tableView)
-
+        
         tableView.rowHeight = 280
         tableView.delegate = self
         tableView.dataSource = self
-
+        
         tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.reuseID)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 190),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -78,13 +74,12 @@ class ListVC: UIViewController {
             downloadButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             downloadButton.heightAnchor.constraint(equalToConstant: 50),
         ])
-
+        
         downloadButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     
     @objc func didTapButton(){
         buttonState.toggle()
-//        listVCDelegate.toggleButton(buttonState)
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -95,46 +90,15 @@ class ListVC: UIViewController {
 extension ListVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return posts.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.reuseID) as! FileCell
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.reuseID) as! FileCell
         let post = posts[indexPath.row]
-            
         cell.set(post: post, buttonState: buttonState)
         return cell
     }
 }
-
-extension ListVC: ListVCDelegate{
-    func toggleButton(_ state: Bool) {
-        print("button is pressed")
-    }
-}
-
-
-
-/*
- 
- func getPost(){
-    
-     networker.posts(query: "karaoke") { [weak self] result in
-         
-         guard let self = self else { return }
-         
-         switch result{
-         case .success(let posts):
-         print(posts)
-         case .failure(let error):
-             print(error)
-         }
-         
-         self?.posts = posts!
-         DispatchQueue.main.async {
-             self?.tableView.reloadData()
-         }
-     }
- }
- */

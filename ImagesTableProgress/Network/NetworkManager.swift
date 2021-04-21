@@ -8,13 +8,13 @@
 import UIKit
 
 enum NetworkError: Error {
-  case badURL
-  case decodingError
-  case noData
+    case badURL
+    case decodingError
+    case noData
 }
 
 fileprivate struct APIResponse: Codable {
-  let results: [Post]
+    let results: [Post]
 }
 
 class NetworkManager {
@@ -29,7 +29,6 @@ class NetworkManager {
     let per_page = 20
     
     let cache = NSCache<NSString, UIImage>()
-    
     
     func getPosts(query: String, completion: @escaping (Result<Results, NetworkError>)-> Void){
         
@@ -58,7 +57,7 @@ class NetworkManager {
         
     }
     
-    
+    //Not in use if we want use image cache in the future
     func downloadImage(from urlString: String, completed: @escaping (UIImage?) -> Void){
         
         let cacheKey = NSString(string: urlString)
@@ -88,13 +87,13 @@ class NetworkManager {
             }
             
             self.cache.setObject(image, forKey: cacheKey)
-                  completed(image)
+            completed(image)
         }
         
         //Start the Task
         task.resume()
     }
-
+    
 }
 
 

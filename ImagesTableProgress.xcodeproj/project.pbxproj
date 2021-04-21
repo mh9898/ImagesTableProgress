@@ -12,7 +12,6 @@
 		7180B41F262F5E8400EA4146 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B41E262F5E8400EA4146 /* ListVC.swift */; };
 		7180B424262F5E8800EA4146 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7180B423262F5E8800EA4146 /* Assets.xcassets */; };
 		7180B427262F5E8800EA4146 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7180B425262F5E8800EA4146 /* LaunchScreen.storyboard */; };
-		7180B43E262F617300EA4146 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B43D262F617300EA4146 /* File.swift */; };
 		7180B443262F624300EA4146 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B436262F606700EA4146 /* FileCell.swift */; };
 		7180B445262F624F00EA4146 /* PBTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B433262F604D00EA4146 /* PBTitleLabel.swift */; };
 		7180B44E262F682D00EA4146 /* PBImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B44D262F682D00EA4146 /* PBImageView.swift */; };
@@ -34,7 +33,6 @@
 		7180B433262F604D00EA4146 /* PBTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBTitleLabel.swift; sourceTree = "<group>"; };
 		7180B434262F604D00EA4146 /* PBProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBProgressView.swift; sourceTree = "<group>"; };
 		7180B436262F606700EA4146 /* FileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
-		7180B43D262F617300EA4146 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		7180B44D262F682D00EA4146 /* PBImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBImageView.swift; sourceTree = "<group>"; };
 		7180B451262F7A8600EA4146 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		7180B454262FF26100EA4146 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -70,16 +68,16 @@
 		7180B419262F5E8400EA4146 /* ImagesTableProgress */ = {
 			isa = PBXGroup;
 			children = (
-				7180B448262F62CC00EA4146 /* Network */,
 				7180B41A262F5E8400EA4146 /* AppDelegate.swift */,
 				7180B41C262F5E8400EA4146 /* SceneDelegate.swift */,
-				7180B41E262F5E8400EA4146 /* ListVC.swift */,
+				7180B448262F62CC00EA4146 /* Network */,
+				7180B447262F62AA00EA4146 /* Modal */,
+				7180B45E2630C42800EA4146 /* Screen */,
+				7180B435262F606700EA4146 /* Cell */,
+				7180B431262F604D00EA4146 /* CustomView */,
 				7180B423262F5E8800EA4146 /* Assets.xcassets */,
 				7180B425262F5E8800EA4146 /* LaunchScreen.storyboard */,
 				7180B428262F5E8800EA4146 /* Info.plist */,
-				7180B447262F62AA00EA4146 /* Modal */,
-				7180B435262F606700EA4146 /* Cell */,
-				7180B431262F604D00EA4146 /* CustomView */,
 			);
 			path = ImagesTableProgress;
 			sourceTree = "<group>";
@@ -106,7 +104,6 @@
 		7180B447262F62AA00EA4146 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
-				7180B43D262F617300EA4146 /* File.swift */,
 				7180B451262F7A8600EA4146 /* Post.swift */,
 			);
 			path = Modal;
@@ -118,6 +115,14 @@
 				7180B454262FF26100EA4146 /* NetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		7180B45E2630C42800EA4146 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				7180B41E262F5E8400EA4146 /* ListVC.swift */,
+			);
+			path = Screen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,7 +198,6 @@
 				7180B455262FF26100EA4146 /* NetworkManager.swift in Sources */,
 				7180B41F262F5E8400EA4146 /* ListVC.swift in Sources */,
 				7180B459263047FF00EA4146 /* PBButton.swift in Sources */,
-				7180B43E262F617300EA4146 /* File.swift in Sources */,
 				7180B41B262F5E8400EA4146 /* AppDelegate.swift in Sources */,
 				7180B44E262F682D00EA4146 /* PBImageView.swift in Sources */,
 				7180B445262F624F00EA4146 /* PBTitleLabel.swift in Sources */,

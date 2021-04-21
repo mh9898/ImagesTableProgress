@@ -8,7 +8,7 @@
 import UIKit
 
 class PBTitleLabel: UILabel {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -33,5 +33,5 @@ class PBTitleLabel: UILabel {
         lineBreakMode = .byTruncatingTail
         translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
 }

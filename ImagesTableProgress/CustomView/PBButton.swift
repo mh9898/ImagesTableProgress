@@ -8,7 +8,7 @@
 import UIKit
 
 class PBButton: UIButton {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -31,5 +31,5 @@ class PBButton: UIButton {
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
 }

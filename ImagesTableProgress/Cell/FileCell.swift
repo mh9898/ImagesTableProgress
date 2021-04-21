@@ -9,18 +9,16 @@ import UIKit
 
 class FileCell: UITableViewCell {
     
-    
     static let reuseID = "FileCell"
     
     let fileIdLabel = PBTitleLabel(textAlignment: .left, fontSize: 18, weight: .bold, color: .label)
-//    let fileIdLabel = PBTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular, color: .secondaryLabel)
     let fileProgressLabel = PBTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular, color: .secondaryLabel)
     let fileImageView = PBImageView(frame: .zero)
     let progressView = PBProgressView()
     var progress: Float = 0.0
     var buttonState: Bool?
     
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configure()
@@ -59,82 +57,56 @@ class FileCell: UITableViewCell {
     func set(post: Post, buttonState: Bool){
         self.buttonState = buttonState
         fileIdLabel.text = "ID#: \(post.id)"
-//        fileImageView.downloadImage(from: post.urls.raw)
-//        progressView.setProgress(progress, animated: true)
+        
         if buttonState == false{
-            print(buttonState, "button is FALSE")
             return
         }
         if buttonState == true{
-        downloadImage(post: post, buttonState: buttonState)
-            print(buttonState, "button is TRUE")
+            downloadImage(post: post, buttonState: buttonState)
         }
-        
-//        downloadImage(post: post, buttonState: buttonState)
-
     }
     
     func downloadImage(post: Post, buttonState: Bool){
         
-        let cacheKey = NSString(string: post.urls.raw)
-    if let imageCache = NetworkManager.shared.cache.object(forKey: cacheKey){
-        fileImageView.image = imageCache
-        return
-    }
-
-        
-                    if let url = URL(string: post.urls.raw) {
-                        let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
+        //##  can use regular, raw, full for different image resolution
+        if let url = URL(string: post.urls.regular) {
+            let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
             
-                        if buttonState == false{
-                            session.invalidateAndCancel()
-                            DispatchQueue.main.async { [weak self] in
-                                self?.progressView.setProgress(self?.progress ?? 0.0, animated: true)
-                                self?.fileProgressLabel.text = String(format: "%.2f", self?.progress ?? 0.0 * 100) + "%"
-                            }
-                            print(buttonState, "button is FALSE")
-
-                            return
-                        }
-                        if buttonState == true{
-                            session.downloadTask(with: url).resume()
-                        }
-                       
-                    }
-                    else{
-                        print("image download url no valid")
-                    }
-            
-        
+            if buttonState == false{
+                session.invalidateAndCancel()
+                DispatchQueue.main.async { [weak self] in
+                    self?.progressView.setProgress(self?.progress ?? 0.0, animated: true)
+                    self?.fileProgressLabel.text = String(format: "%.2f", self?.progress ?? 0.0 * 100) + "%"
+                }
+                return
+            }
+            if buttonState == true{
+                session.downloadTask(with: url).resume()
+            }
+        }
+        else{
+            print("image download url no valid")
+        }
     }
     
 }
 
 extension FileCell: URLSessionDownloadDelegate{
-
+    
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
-     
-        print("display Image")
         guard let data = try? Data(contentsOf: location) else {
             print("could not display image")
             return
         }
-        var image = UIImage(data: data)
-        
-//        guard let locationString = try? String(contentsOf: location) else { return }
-//        let cacheKey = NSString(string: locationString)
-//    if let imageCache = NetworkManager.shared.cache.object(forKey: cacheKey){
-//        image = imageCache
-//        return
-//    }
+        let image = UIImage(data: data)
         
         DispatchQueue.main.async {  [weak self] in
             self?.fileImageView.image = image
             self?.progressView.isHidden = true
         }
     }
-
+    
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         progress = (Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)) * 10
         
@@ -154,22 +126,5 @@ extension FileCell: URLSessionDownloadDelegate{
                 }
             }
         }
-        
-           
-       
-        
-        
-//        print(progress)
     }
-    
-
-
 }
-
-//extension FileCell: ListVCDelegate{
-//    func isDownloadButtonPressed(isButtonPressed: Bool) {
-//        print("button was presses")
-//    }
-//    
-//    
-//}
