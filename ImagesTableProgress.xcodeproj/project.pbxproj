@@ -12,7 +12,7 @@
 		7180B41F262F5E8400EA4146 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B41E262F5E8400EA4146 /* ListVC.swift */; };
 		7180B424262F5E8800EA4146 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7180B423262F5E8800EA4146 /* Assets.xcassets */; };
 		7180B427262F5E8800EA4146 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7180B425262F5E8800EA4146 /* LaunchScreen.storyboard */; };
-		7180B443262F624300EA4146 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B436262F606700EA4146 /* FileCell.swift */; };
+		7180B443262F624300EA4146 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B436262F606700EA4146 /* PostCell.swift */; };
 		7180B445262F624F00EA4146 /* PBTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B433262F604D00EA4146 /* PBTitleLabel.swift */; };
 		7180B44E262F682D00EA4146 /* PBImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B44D262F682D00EA4146 /* PBImageView.swift */; };
 		7180B452262F7A8600EA4146 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180B451262F7A8600EA4146 /* Post.swift */; };
@@ -32,7 +32,7 @@
 		7180B432262F604D00EA4146 /* PBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBButton.swift; sourceTree = "<group>"; };
 		7180B433262F604D00EA4146 /* PBTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBTitleLabel.swift; sourceTree = "<group>"; };
 		7180B434262F604D00EA4146 /* PBProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBProgressView.swift; sourceTree = "<group>"; };
-		7180B436262F606700EA4146 /* FileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
+		7180B436262F606700EA4146 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		7180B44D262F682D00EA4146 /* PBImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBImageView.swift; sourceTree = "<group>"; };
 		7180B451262F7A8600EA4146 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		7180B454262FF26100EA4146 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		7180B435262F606700EA4146 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				7180B436262F606700EA4146 /* FileCell.swift */,
+				7180B436262F606700EA4146 /* PostCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -202,7 +202,7 @@
 				7180B44E262F682D00EA4146 /* PBImageView.swift in Sources */,
 				7180B445262F624F00EA4146 /* PBTitleLabel.swift in Sources */,
 				7180B452262F7A8600EA4146 /* Post.swift in Sources */,
-				7180B443262F624300EA4146 /* FileCell.swift in Sources */,
+				7180B443262F624300EA4146 /* PostCell.swift in Sources */,
 				7180B41D262F5E8400EA4146 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

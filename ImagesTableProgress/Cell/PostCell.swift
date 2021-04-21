@@ -7,9 +7,9 @@
 
 import UIKit
 
-class FileCell: UITableViewCell {
+class PostCell: UITableViewCell {
     
-    static let reuseID = "FileCell"
+    static let reuseID = "PostCell"
     
     let fileIdLabel = PBTitleLabel(textAlignment: .left, fontSize: 18, weight: .bold, color: .label)
     let fileProgressLabel = PBTitleLabel(textAlignment: .left, fontSize: 16, weight: .regular, color: .secondaryLabel)
@@ -91,7 +91,7 @@ class FileCell: UITableViewCell {
     
 }
 
-extension FileCell: URLSessionDownloadDelegate{
+extension PostCell: URLSessionDownloadDelegate{
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         

@@ -55,7 +55,7 @@ class ListVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(FileCell.self, forCellReuseIdentifier: FileCell.reuseID)
+        tableView.register(PostCell.self, forCellReuseIdentifier: PostCell.reuseID)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -96,7 +96,7 @@ extension ListVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: FileCell.reuseID) as! FileCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.reuseID) as! PostCell
         let post = posts[indexPath.row]
         cell.set(post: post, buttonState: buttonState)
         return cell

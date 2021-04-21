@@ -21,11 +21,10 @@ class NetworkManager {
     
     static let shared = NetworkManager()
     
-    //make a search images url end point
     private let baseURL = "https://api.unsplash.com"
     let searchPath = "/search/photos"
     var query = "karaoke"
-    let tokenID = "u5g3fusSWsVkWLOfXTwF_gb7V28cZJKLKlq1Z_Ie3ZU"
+    private let tokenID = "u5g3fusSWsVkWLOfXTwF_gb7V28cZJKLKlq1Z_Ie3ZU"
     let per_page = 20
     
     let cache = NSCache<NSString, UIImage>()
@@ -61,21 +60,19 @@ class NetworkManager {
     func downloadImage(from urlString: String, completed: @escaping (UIImage?) -> Void){
         
         let cacheKey = NSString(string: urlString)
-        //find out if the image is the chace
+        
         if let image = cache.object(forKey: cacheKey){
-            //add image
             completed(image)
             return
         }
         
-        //create & check a URL
         guard let url = URL(string: urlString) else {
             completed(nil)
             return
         }
-        //URLSessions Task = Fetch the data
+      
         let task = URLSession.shared.dataTask(with: url) {[weak self] (data, response, error) in
-            //handle errors - passing nil(empty image) when error
+            
             guard let self = self,
                   error == nil,
                   let response = response as? HTTPURLResponse,
@@ -90,7 +87,6 @@ class NetworkManager {
             completed(image)
         }
         
-        //Start the Task
         task.resume()
     }
     
