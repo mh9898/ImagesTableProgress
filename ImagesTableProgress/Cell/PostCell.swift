@@ -38,7 +38,7 @@ class PostCell: UITableViewCell {
             fileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 6),
             fileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             fileImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            fileImageView.heightAnchor.constraint(equalToConstant: 200),
+            fileImageView.heightAnchor.constraint(equalToConstant: 60),
             
             progressView.topAnchor.constraint(equalTo: fileImageView.bottomAnchor, constant: 6),
             progressView.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 20),
@@ -69,7 +69,7 @@ class PostCell: UITableViewCell {
     func downloadImage(post: Post, buttonState: Bool){
         
         //##  can use regular, raw, full for different image resolution
-        if let url = URL(string: post.urls.regular) {
+        if let url = URL(string: post.urls.raw) {
             let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
             
             if buttonState == false{
@@ -113,16 +113,19 @@ extension PostCell: URLSessionDownloadDelegate{
         if buttonState == true{
             if progress <= 1.0{
                 DispatchQueue.main.async { [weak self] in
-                    self?.progressView.isHidden = false
-                    self?.progressView.setProgress(self?.progress ?? 0.0, animated: true)
-                    self?.fileProgressLabel.text = String(format: "%.2f", self?.progress ?? 0.0 * 100) + "%"
+                    
+                    guard let self = self else {return}
+                    self.fileImageView.isHidden = true
+                    self.fileProgressLabel.text = String(format: "%.2f", self.progress * 100) + "%"
                 }
             }
             else{
                 DispatchQueue.main.async { [weak self] in
-                    self?.progressView.isHidden = true
-                    self?.progressView.setProgress(self?.progress ?? 0.0, animated: true)
-                    self?.fileProgressLabel.text = "1.00%"
+                    
+                    guard let self = self else {return}
+                    self.fileImageView.isHidden = false
+                    self.progressView.progress = self.progress
+                    self.fileProgressLabel.text = "DONe"
                 }
             }
         }

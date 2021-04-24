@@ -25,7 +25,7 @@ class NetworkManager {
     let searchPath = "/search/photos"
     var query = "karaoke"
     private let tokenID = "u5g3fusSWsVkWLOfXTwF_gb7V28cZJKLKlq1Z_Ie3ZU"
-    let per_page = 20
+    let per_page = 4
     
     let cache = NSCache<NSString, UIImage>()
     

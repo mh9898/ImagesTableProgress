@@ -51,7 +51,7 @@ class ListVC: UIViewController {
     func configureTableView(){
         view.addSubview(tableView)
         
-        tableView.rowHeight = 280
+        tableView.rowHeight = 100
         tableView.delegate = self
         tableView.dataSource = self
         
