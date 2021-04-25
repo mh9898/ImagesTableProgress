@@ -28,7 +28,7 @@ class PostCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(){
+    private func configure(){
         addSubview(fileProgressLabel)
         addSubview(fileIdLabel)
         addSubview(fileImageView)
@@ -66,18 +66,14 @@ class PostCell: UITableViewCell {
         }
     }
     
-    func downloadImage(post: Post, buttonState: Bool){
+    private func downloadImage(post: Post, buttonState: Bool){
         
         //##  can use regular, raw, full for different image resolution
         if let url = URL(string: post.urls.raw) {
             let session = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
             
             if buttonState == false{
-                session.invalidateAndCancel()
-                DispatchQueue.main.async { [weak self] in
-                    self?.progressView.setProgress(self?.progress ?? 0.0, animated: true)
-                    self?.fileProgressLabel.text = String(format: "%.2f", self?.progress ?? 0.0 * 100) + "%"
-                }
+                downloadPause(session: session)
                 return
             }
             if buttonState == true{
@@ -89,7 +85,42 @@ class PostCell: UITableViewCell {
         }
     }
     
+    private func downloadPause(session: URLSession){
+        session.invalidateAndCancel()
+        DispatchQueue.main.async { [weak self] in
+            self?.progressView.setProgress(self?.progress ?? 0.0, animated: true)
+            self?.fileProgressLabel.text = String(format: "%.2f", self?.progress ?? 0.0 * 100) + "%"
+        }
+    }
+    
+    private func downloadFinish(image: UIImage?){
+        DispatchQueue.main.async {  [weak self] in
+            self?.fileImageView.image = image
+            self?.progressView.isHidden = true
+        }
+    }
+    
+    private func downloadTaskInProgress(){
+        DispatchQueue.main.async { [weak self] in
+            
+            guard let self = self else {return}
+            
+            self.fileImageView.isHidden = true
+            self.fileProgressLabel.text = String(format: "%.2f", self.progress * 100) + "%"
+        }
+    }
+    
+    private func downloadTaskPaused(){
+        DispatchQueue.main.async { [weak self] in
+            
+            guard let self = self else {return}
+            self.fileImageView.isHidden = false
+            self.progressView.progress = self.progress
+            self.fileProgressLabel.text = "DONe"
+        }
+    }
 }
+
 
 extension PostCell: URLSessionDownloadDelegate{
     
@@ -100,11 +131,7 @@ extension PostCell: URLSessionDownloadDelegate{
             return
         }
         let image = UIImage(data: data)
-        
-        DispatchQueue.main.async {  [weak self] in
-            self?.fileImageView.image = image
-            self?.progressView.isHidden = true
-        }
+        self.downloadFinish(image: image)
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
@@ -112,21 +139,10 @@ extension PostCell: URLSessionDownloadDelegate{
         
         if buttonState == true{
             if progress <= 1.0{
-                DispatchQueue.main.async { [weak self] in
-                    
-                    guard let self = self else {return}
-                    self.fileImageView.isHidden = true
-                    self.fileProgressLabel.text = String(format: "%.2f", self.progress * 100) + "%"
-                }
+                self.downloadTaskInProgress()
             }
             else{
-                DispatchQueue.main.async { [weak self] in
-                    
-                    guard let self = self else {return}
-                    self.fileImageView.isHidden = false
-                    self.progressView.progress = self.progress
-                    self.fileProgressLabel.text = "DONe"
-                }
+                self.downloadTaskPaused()
             }
         }
     }
